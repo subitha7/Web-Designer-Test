@@ -1,0 +1,40 @@
+.menu-btn.active {
+    background-color: #0d6efd;
+}
+
+#sidebar {
+    width: 220px;
+    min-height: 100vh;
+    background-color: #343a40;
+    color: white;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        position: absolute;
+        z-index: 1000;
+        width: 200px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    #sidebar.show {
+        transform: translateX(0);
+    }
+
+    .d-flex {
+        flex-direction: column;
+    }
+}
+
+.menu-btn.active {
+    background-color: #ffc107;
+    color: black;
+}
