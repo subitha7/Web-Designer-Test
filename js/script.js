@@ -47,8 +47,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
       if (menu === "dashboard") {
-        pageTitle.textContent = "Dashboard";
-       
+        pageTitle.textContent = "Home";
+        contentArea.innerHTML = `
+        <div id="contentArea">
+                <section class="mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <h1 class="fw-bold display-6 mb-3">Welcome to TechCorp </h1>
+                            <p class="lead text-muted">
+                                Your control panel for monitoring projects, managing users, and tracking company
+                                progress.
+                            </p>
+                            <div class="mt-4">
+                                <button class="btn btn-primary me-2">View Reports</button>
+                                <button class="btn btn-outline-secondary">Add New User</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786"
+                                class="img-fluid rounded shadow" alt="Dashboard Illustration">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-5">
+                    <div class="row text-center g-3">
+                        <div class="col-md-3">
+                            <div class="card shadow-sm p-3 h-100">
+                                <h5 class="fw-bold">Users</h5>
+                                <p class="display-6">245</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card shadow-sm p-3 h-100">
+                                <h5 class="fw-bold">Projects</h5>
+                                <p class="display-6">32</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card shadow-sm p-3 h-100">
+                                <h5 class="fw-bold">Tasks</h5>
+                                <p class="display-6">78</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card shadow-sm p-3 h-100">
+                                <h5 class="fw-bold">Clients</h5>
+                                <p class="display-6">16</p>
+                            </div>
+                        </div>
+                    </div>
+       `
       }
 
 if (menu === "about") {
