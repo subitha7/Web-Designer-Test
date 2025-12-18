@@ -1,40 +1,114 @@
-.menu-btn.active {
-    background-color: #0d6efd;
+body {
+  background-color: #f4f6f9;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+/* Sidebar */
 #sidebar {
-    width: 220px;
-    min-height: 100vh;
-    background-color: #343a40;
-    color: white;
+  background: linear-gradient(180deg, #667eea, #764ba2);
 }
 
-.menu-btn {
-    background: none;
-    border: none;
-    text-align: left;
-    width: 100%;
+#sidebar .nav-link {
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 5px;
 }
 
+#sidebar .nav-link.active,
+#sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Content Area */
+#contentArea {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  min-height: 400px;
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: 12px;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+}
+
+/* Mobile Sidebar */
 @media (max-width: 768px) {
-    #sidebar {
-        position: absolute;
-        z-index: 1000;
-        width: 200px;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-    }
+  #sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    transition: 0.3s;
+    z-index: 1000;
+  }
 
-    #sidebar.show {
-        transform: translateX(0);
-    }
-
-    .d-flex {
-        flex-direction: column;
-    }
+  #sidebar.show {
+    left: 0;
+  }
+}
+/* ====== LOGIN PAGE BACKGROUND ====== */
+body.login-page {
+  /* Gradient background */
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.menu-btn.active {
-    background-color: #ffc107;
-    color: black;
+/* Login card styling */
+.login-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px 25px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Headings */
+.login-card h3 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input fields */
+.login-card .form-control {
+  border-radius: 12px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+.login-card .btn-primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
+  font-weight: 600;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.login-card .btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Optional: small footer text */
+.login-card small {
+  display: block;
+  margin-top: 15px;
+  color: #666;
 }

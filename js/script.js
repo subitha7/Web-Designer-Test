@@ -1,12 +1,17 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
+  /* =========================
+     LOGIN LOGIC
+  ========================== */
   const loginForm = document.getElementById("loginForm");
+
   if (loginForm) {
     loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
       if (username === "admin" && password === "admin") {
         window.location.href = "dashboard.html";
       } else {
@@ -15,25 +20,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  /* =========================
+     DASHBOARD LOGIC
+  ========================== */
   const sidebar = document.getElementById("sidebar");
   const sidebarToggle = document.getElementById("sidebarToggle");
-
   const menuButtons = document.querySelectorAll(".menu-btn");
   const contentArea = document.getElementById("contentArea");
   const pageTitle = document.getElementById("pageTitle");
 
+  if (!menuButtons.length) return;
+
+  /* Table data */
   const tableData = {
-    1: [{ id: 1, name: "John", email: "john1@test.com" }, { id: 2, name: "Jane", email: "jane1@test.com" }],
-    2: [{ id: 1, name: "Alice", email: "alice@test.com" }, { id: 2, name: "Bob", email: "bob@test.com" }],
-    3: [{ id: 1, name: "Charlie", email: "charlie@test.com" }, { id: 2, name: "Diana", email: "diana@test.com" }],
-    4: [{ id: 1, name: "kabi", email: "kabi@test.com" }, { id: 2, name: "Dina", email: "dina@test.com" }],
-    5: [{ id: 1, name: "mani", email: "mani@test.com" }, { id: 2, name: "kala", email: "kala@test.com" }],
-    6: [{ id: 1, name: "doe", email: "doe@test.com" }, { id: 2, name: "key", email: "key@test.com" }],
-    7: [{ id: 1, name: "sat", email: "sat@test.com" }, { id: 2, name: "subi", email: "subi@test.com" }]
+    users: [
+      { id: 1, name: "John", email: "john@test.com" },
+      { id: 2, name: "Jane", email: "jane@test.com" }
+    ]
   };
 
   menuButtons.forEach(button => {
     button.addEventListener("click", () => {
+
+      // Mobile sidebar close
       if (window.innerWidth < 768 && sidebar) {
         sidebar.classList.remove("show");
       }
@@ -41,86 +50,243 @@ document.addEventListener("DOMContentLoaded", function () {
       menuButtons.forEach(btn => btn.classList.remove("active"));
       button.classList.add("active");
 
-      const menuNumber = button.getAttribute("data-menu");
-      pageTitle.innerText = "Menu " + menuNumber;
+      const menu = button.dataset.menu;
 
-      const rows = tableData[menuNumber] || [];
+      /* ========= HOME ========= */
+      if (menu === "dashboard") {
+        pageTitle.textContent = "Dashboard";
+       
+      }
 
-      let tableHTML = `
-      <form class="mb-4">
-        <div class="row">
-          <div class="col-md-4 mb-2">
-            <input type="text" name="name" class="form-control" placeholder="Name">
-          </div>
-          <div class="col-md-4 mb-2">
-            <input type="email" name="email" class="form-control" placeholder="Email">
-          </div>
-          <div class="col-md-4 mb-2">
-            <button type="submit" class="btn btn-success w-100">Submit</button>
+     /* ========= ABOUT ========= */
+if (menu === "about") {
+  pageTitle.textContent = "About Us";
+  contentArea.innerHTML = `
+    <!-- Company Intro -->
+    <section class="mb-5">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+               class="img-fluid rounded shadow"
+               alt="Our Company">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-bold mb-3">Who We Are</h3>
+          <p>
+            TechCorp is a leading IT company delivering innovative, secure, and scalable
+            digital solutions. We specialize in web development, cloud services, and IT consulting.
+          </p>
+          <ul>
+            <li>10+ Years of Industry Experience</li>
+            <li>Certified and Skilled Professionals</li>
+            <li>Customer-Centric Approach</li>
+            <li>Innovative & Scalable Solutions</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="mb-5 text-center">
+      <h4 class="fw-bold mb-3">Our Mission & Vision</h4>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card p-3 shadow-sm h-100">
+            <h5 class="fw-bold">Mission</h5>
+            <p>To provide high-quality IT solutions that empower businesses worldwide.</p>
           </div>
         </div>
-      </form>
+        <div class="col-md-6">
+          <div class="card p-3 shadow-sm h-100">
+            <h5 class="fw-bold">Vision</h5>
+            <p>To be a globally recognized IT company known for innovation and reliability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead class="table-secondary">
-            <tr>
-              <th>S.No</th>
-              <th>Name</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
+    <!-- Our Team -->
+    <section>
+      <h4 class="fw-bold mb-3 text-center">Meet Our Team</h4>
+      <div class="row text-center g-3">
+        <div class="col-md-3">
+          <div class="card p-3 shadow-sm">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" 
+                 class="img-fluid rounded-circle mb-2" alt="Team Member">
+            <p class="fw-bold mb-0">John Doe</p>
+            <small>CEO</small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card p-3 shadow-sm">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" 
+                 class="img-fluid rounded-circle mb-2" alt="Team Member">
+            <p class="fw-bold mb-0">Jane Smith</p>
+            <small>CTO</small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card p-3 shadow-sm">
+            <img src="https://randomuser.me/api/portraits/men/56.jpg" 
+                 class="img-fluid rounded-circle mb-2" alt="Team Member">
+            <p class="fw-bold mb-0">Mike Brown</p>
+            <small>Lead Developer</small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card p-3 shadow-sm">
+            <img src="https://randomuser.me/api/portraits/women/66.jpg" 
+                 class="img-fluid rounded-circle mb-2" alt="Team Member">
+            <p class="fw-bold mb-0">Sara Lee</p>
+            <small>UI/UX Designer</small>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
 
-      rows.forEach(row => {
-        tableHTML += `
-          <tr>
-            <td>${row.id}</td>
-            <td>${row.name}</td>
-            <td>${row.email}</td>
-          </tr>
+
+      /* ========= CONTACT ========= */
+     /* ========= CONTACT ========= */
+if (menu === "contact") {
+  pageTitle.textContent = "Contact Us";
+  contentArea.innerHTML = `
+    <div class="row">
+      <!-- Contact Info -->
+      <div class="col-lg-5 mb-4">
+        <h4 class="fw-bold mb-3">Get in Touch</h4>
+        <p>We’d love to hear from you. Reach out to us for project inquiries or support.</p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><strong>Email:</strong> contact@example.com</li>
+          <li class="mb-2"><strong>Phone:</strong> +91 12345 67890</li>
+          <li class="mb-2"><strong>Address:</strong> 123 Tech Street, Silicon City</li>
+        </ul>
+        <div class="mt-4">
+          <button class="btn btn-primary me-2">Email Us</button>
+          <button class="btn btn-outline-secondary">Call Us</button>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-lg-7">
+        <div class="card p-4 shadow-sm">
+          <h5 class="fw-bold mb-3">Send a Message</h5>
+          <form id="contactForm">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Optional: handle form submission
+  const contactForm = contentArea.querySelector("#contactForm");
+  contactForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const name = this.name.value.trim();
+    const email = this.email.value.trim();
+    const message = this.message.value.trim();
+
+    if (!name || !email || !message) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    alert("Thank you, " + name + "! Your message has been sent.");
+    this.reset();
+  });
+}
+
+
+      /* ========= USERS TABLE ========= */
+      if (menu === "users") {
+        pageTitle.textContent = "Users";
+
+        let rows = tableData.users;
+        let tableHTML = `
+          <form class="mb-4">
+            <div class="row">
+              <div class="col-md-4 mb-2">
+                <input type="text" class="form-control" name="name" placeholder="Name">
+              </div>
+              <div class="col-md-4 mb-2">
+                <input type="email" class="form-control" name="email" placeholder="Email">
+              </div>
+              <div class="col-md-4 mb-2">
+                <button class="btn btn-success w-100">Add User</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
         `;
-      });
 
-      tableHTML += `</tbody></table></div>`;
-
-      contentArea.innerHTML = tableHTML;
-
-      const form = contentArea.querySelector("form");
-      if (form) {
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const name = form.querySelector('input[name="name"]').value.trim();
-          const email = form.querySelector('input[name="email"]').value.trim();
-
-          if (!name || !email) {
-            alert("Please fill both Name and Email");
-            return;
-          }
-
-          const tableBody = contentArea.querySelector("table tbody");
-          const newRow = document.createElement("tr");
-          const rowCount = tableBody.rows.length + 1;
-
-          newRow.innerHTML = `
-            <td>${rowCount}</td>
-            <td>${name}</td>
-            <td>${email}</td>
+        rows.forEach(r => {
+          tableHTML += `
+            <tr>
+              <td>${r.id}</td>
+              <td>${r.name}</td>
+              <td>${r.email}</td>
+            </tr>
           `;
+        });
 
-          tableBody.appendChild(newRow);
+        tableHTML += `</tbody></table></div>`;
+        contentArea.innerHTML = tableHTML;
+
+        const form = contentArea.querySelector("form");
+        form.addEventListener("submit", e => {
+          e.preventDefault();
+          const name = form.name.value.trim();
+          const email = form.email.value.trim();
+          if (!name || !email) return alert("Fill all fields");
+
+          const tbody = contentArea.querySelector("tbody");
+          tbody.innerHTML += `
+            <tr>
+              <td>${tbody.rows.length + 1}</td>
+              <td>${name}</td>
+              <td>${email}</td>
+            </tr>
+          `;
           form.reset();
         });
+      }
+
+      /* ========= LOGOUT ========= */
+      if (menu === "logout") {
+        window.location.href = "index.html";
       }
     });
   });
 
+  /* Sidebar Toggle (Mobile) */
   if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener("click", () => {
       sidebar.classList.toggle("show");
     });
   }
-});
 
+});
