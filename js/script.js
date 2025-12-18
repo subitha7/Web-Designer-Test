@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* =========================
-     LOGIN LOGIC
-  ========================== */
-  const loginForm = document.getElementById("loginForm");
+   const loginForm = document.getElementById("loginForm");
 
   if (loginForm) {
     loginForm.addEventListener("submit", function (e) {
@@ -20,9 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* =========================
-     DASHBOARD LOGIC
-  ========================== */
   const sidebar = document.getElementById("sidebar");
   const sidebarToggle = document.getElementById("sidebarToggle");
   const menuButtons = document.querySelectorAll(".menu-btn");
@@ -31,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!menuButtons.length) return;
 
-  /* Table data */
+
   const tableData = {
     users: [
       { id: 1, name: "John", email: "john@test.com" },
@@ -42,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
   menuButtons.forEach(button => {
     button.addEventListener("click", () => {
 
-      // Mobile sidebar close
       if (window.innerWidth < 768 && sidebar) {
         sidebar.classList.remove("show");
       }
@@ -52,13 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const menu = button.dataset.menu;
 
-      /* ========= HOME ========= */
+
       if (menu === "dashboard") {
         pageTitle.textContent = "Dashboard";
        
       }
 
-     /* ========= ABOUT ========= */
 if (menu === "about") {
   pageTitle.textContent = "About Us";
   contentArea.innerHTML = `
@@ -146,9 +138,6 @@ if (menu === "about") {
   `;
 }
 
-
-      /* ========= CONTACT ========= */
-     /* ========= CONTACT ========= */
 if (menu === "contact") {
   pageTitle.textContent = "Contact Us";
   contentArea.innerHTML = `
@@ -192,7 +181,6 @@ if (menu === "contact") {
     </div>
   `;
 
-  // Optional: handle form submission
   const contactForm = contentArea.querySelector("#contactForm");
   contactForm.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -210,8 +198,6 @@ if (menu === "contact") {
   });
 }
 
-
-      /* ========= USERS TABLE ========= */
       if (menu === "users") {
         pageTitle.textContent = "Users";
 
@@ -275,14 +261,12 @@ if (menu === "contact") {
         });
       }
 
-      /* ========= LOGOUT ========= */
       if (menu === "logout") {
         window.location.href = "index.html";
       }
     });
   });
 
-  /* Sidebar Toggle (Mobile) */
   if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener("click", () => {
       sidebar.classList.toggle("show");
